@@ -77,9 +77,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="secutrialr--appveyor-build-status-travis-codecov" class="section level1">
+<div id="secutrialr---cran-checks--appveyor-build-status-travis-codecov" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#secutrialr--appveyor-build-status-travis-codecov" class="anchor"></a>secuTrialR <a href="https://github.com/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://img.shields.io/badge/version-1.0.3-blue.svg"></a> <a href="https://ci.appveyor.com/project/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://ci.appveyor.com/api/projects/status/github/SwissClinicalTrialOrganisation/secuTrialR?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://travis-ci.com/github/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://api.travis-ci.com/SwissClinicalTrialOrganisation/secuTrialR.svg?branch=master" alt="travis"></a> <a href="https://codecov.io/github/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://codecov.io/github/SwissClinicalTrialOrganisation/secuTrialR/branch/master/graphs/badge.svg" alt="codecov"></a>
+<a href="#secutrialr---cran-checks--appveyor-build-status-travis-codecov" class="anchor"></a>secuTrialR <a href="https://github.com/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://img.shields.io/badge/dev%20version-1.0.3-blue.svg"></a> <a href="https://cran.r-project.org/package=secuTrialR"><img src="https://www.r-pkg.org/badges/version/secuTrialR?color=green"></a> <a href="https://cran.r-project.org/web/checks/check_results_secuTrialR.html"><img src="https://cranchecks.info/badges/summary/secuTrialR" alt="CRAN checks"></a> <a href="https://cran.r-project.org/package=secuTrialR"><img src="http://cranlogs.r-pkg.org/badges/last-month/secuTrialR?color=green"></a> <a href="https://ci.appveyor.com/project/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://ci.appveyor.com/api/projects/status/github/SwissClinicalTrialOrganisation/secuTrialR?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://travis-ci.com/github/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://api.travis-ci.com/SwissClinicalTrialOrganisation/secuTrialR.svg?branch=master" alt="travis"></a> <a href="https://codecov.io/github/SwissClinicalTrialOrganisation/secuTrialR"><img src="https://codecov.io/github/SwissClinicalTrialOrganisation/secuTrialR/branch/master/graphs/badge.svg" alt="codecov"></a>
 </h1></div>
 <p>An R package to handle data from the clinical data management system (CDMS) <a href="https://www.secutrial.com/en/">secuTrial</a>.</p>
 <div id="installing-from-github-with-devtools" class="section level2">
@@ -449,27 +449,21 @@
 <div class="sourceCode" id="cb52"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html">knit</a></span>(<span class="st">"README.Rmd"</span>)</pre></div>
 </div>
-<div id="building-the-pkgdown-site" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-the-pkgdown-site" class="anchor"></a>Building the <code>pkgdown</code> site</h3>
-<div class="sourceCode" id="cb53"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">pkgdown</span>)
-<span class="fu"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</pre></div>
-</div>
 <div id="handling-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#handling-dependencies" class="anchor"></a>Handling dependencies</h3>
 <p>Dependencies to other R packages are to be declared in the <code>DESCRIPTION</code> file under <code>Imports:</code> and in the specific <code>roxygen2</code> documentation of the functions relying on the dependency. It is suggested to be as explicit as possible. i.e. Just import functions that are needed and not entire packages.</p>
 <p>Example to import <code>str_match</code> <code>str_length</code> <code>str_wrap</code> from the <code>stringr</code> package (see <a href="R/read_secuTrial_raw.R">read_secuTrial_raw.R</a>):</p>
-<div class="sourceCode" id="cb54"><pre class="r">#' @importFrom stringr str_match str_length str_wrap</pre></div>
+<div class="sourceCode" id="cb53"><pre class="r">#' @importFrom stringr str_match str_length str_wrap</pre></div>
 </div>
 <div id="preparing-a-release-on-cran" class="section level3">
 <h3 class="hasAnchor">
 <a href="#preparing-a-release-on-cran" class="anchor"></a>Preparing a release on CRAN</h3>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># build the package archive</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="ex">R</span> CMD build secuTrialR</span>
-<span id="cb55-3"><a href="#cb55-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a><span class="co"># in this example for version 0.9.0</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a><span class="ex">R</span> CMD check secuTrialR_0.9.0.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># build the package archive</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="ex">R</span> CMD build secuTrialR</span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="co"># in this example for version 0.9.0</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a><span class="ex">R</span> CMD check secuTrialR_0.9.0.tar.gz</span></code></pre></div>
 </div>
 <div id="versioning-and-releases" class="section level3">
 <h3 class="hasAnchor">
