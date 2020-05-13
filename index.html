@@ -151,7 +151,7 @@
 <p><code>bmd_export</code> is a list, with class <code>secuTrialdata</code>. To prevent it from printing all data to the console, a special print method returns some useful information about the objects within <code>bmd_export</code> instead. The information returned includes the original file name in the datafile, it’s name in the <code>secuTrialdata</code> object, together with the number of rows and columns and a column indicating whether the object is metadata or not:</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="no">bmd_export</span></pre></div>
 <pre><code>## secuTrial data imported from:
-## /home/wrightp/R/x86_64-pc-linux-gnu-library/3.6/secuTrialR/extdata/sT_exports/
+## /Users/runner/runners/2.169.1/work/_temp/Library/secuTrialR/extdata/sT_exports/
 ## BMD/s_export_CSV-xls_BMD_short_en_utf8.zip 
 ##  table nrow ncol  meta original_name
 ##     vp    1   10  TRUE        vp.xls
@@ -357,20 +357,20 @@
 ## 8            ctu05sae             0                 2     0             0
 ## 9  ctu05studyterminat             0                10     0             0
 ## 10     ctu05treatment             0                11     0             0
-##    with_errors partly_filled.percent completely_filled.percent
-## 5            0            0.05882353                 0.9411765
-## 6            0            0.17647059                 0.8235294
-## 7            0            0.07692308                 0.9230769
-## 8            0            0.00000000                 1.0000000
-## 9            0            0.00000000                 1.0000000
-## 10           0            0.00000000                 1.0000000
-##    empty.percent with_warnings.percent with_errors.percent form_count
-## 5              0                     0                   0         17
-## 6              0                     0                   0         17
-## 7              0                     0                   0         13
-## 8              0                     0                   0          2
-## 9              0                     0                   0         10
-## 10             0                     0                   0         11</code></pre>
+##    with_errors partly_filled.percent completely_filled.percent empty.percent
+## 5            0            0.05882353                 0.9411765             0
+## 6            0            0.17647059                 0.8235294             0
+## 7            0            0.07692308                 0.9230769             0
+## 8            0            0.00000000                 1.0000000             0
+## 9            0            0.00000000                 1.0000000             0
+## 10           0            0.00000000                 1.0000000             0
+##    with_warnings.percent with_errors.percent form_count
+## 5                      0                   0         17
+## 6                      0                   0         17
+## 7                      0                   0         13
+## 8                      0                   0          2
+## 9                      0                   0         10
+## 10                     0                   0         11</code></pre>
 <p>As you can see, the majority of forms has been completeley filled. None of the forms were saved empty, with warnings or with errors. For a more participant id centered statistic you can perform the following.</p>
 <div class="sourceCode" id="cb44"><pre class="r"><span class="fu"><a href="reference/form_status_counts.html">form_status_counts</a></span>(<span class="no">ctu05</span>)</pre></div>
 <p>This will give you a count based overview per participant id and form. Please note that both <code>form_status_summary</code> and <code>form_status_counts</code> only work with saved forms since unsaved form data is not available in secuTrial exports.</p>
@@ -445,25 +445,23 @@
 <div id="generating-the-readme-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#generating-the-readme-file" class="anchor"></a>Generating the README file</h3>
-<p>The README file contains both standard text and interpreted R code. It must therefore be compiled. Changes should be made in the <code>README.Rmd</code> file and the file “knited” with R. This is easiest with RStudio, but other methods are available.</p>
-<div class="sourceCode" id="cb52"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">knitr</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html">knit</a></span>(<span class="st">"README.Rmd"</span>)</pre></div>
+<p>The README file is automatically generated on GitHub via a GitHub action.</p>
 </div>
 <div id="handling-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#handling-dependencies" class="anchor"></a>Handling dependencies</h3>
 <p>Dependencies to other R packages are to be declared in the <code>DESCRIPTION</code> file under <code>Imports:</code> and in the specific <code>roxygen2</code> documentation of the functions relying on the dependency. It is suggested to be as explicit as possible. i.e. Just import functions that are needed and not entire packages.</p>
 <p>Example to import <code>str_match</code> <code>str_length</code> <code>str_wrap</code> from the <code>stringr</code> package (see <a href="R/read_secuTrial_raw.R">read_secuTrial_raw.R</a>):</p>
-<div class="sourceCode" id="cb53"><pre class="r">#' @importFrom stringr str_match str_length str_wrap</pre></div>
+<div class="sourceCode" id="cb52"><pre class="r">#' @importFrom stringr str_match str_length str_wrap</pre></div>
 </div>
 <div id="preparing-a-release-on-cran" class="section level3">
 <h3 class="hasAnchor">
 <a href="#preparing-a-release-on-cran" class="anchor"></a>Preparing a release on CRAN</h3>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># build the package archive</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a><span class="ex">R</span> CMD build secuTrialR</span>
-<span id="cb54-3"><a href="#cb54-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a><span class="co"># in this example for version 0.9.0</span></span>
-<span id="cb54-5"><a href="#cb54-5"></a><span class="ex">R</span> CMD check secuTrialR_0.9.0.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># build the package archive</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="ex">R</span> CMD build secuTrialR</span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="co"># in this example for version 0.9.0</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a><span class="ex">R</span> CMD check secuTrialR_0.9.0.tar.gz</span></code></pre></div>
 </div>
 <div id="versioning-and-releases" class="section level3">
 <h3 class="hasAnchor">
