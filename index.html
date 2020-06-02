@@ -452,7 +452,7 @@
 <a href="#handling-dependencies" class="anchor"></a>Handling dependencies</h3>
 <p>Dependencies to other R packages are to be declared in the <code>DESCRIPTION</code> file under <code>Imports:</code> and in the specific <code>roxygen2</code> documentation of the functions relying on the dependency. It is suggested to be as explicit as possible. i.e. Just import functions that are needed and not entire packages.</p>
 <p>Example to import <code>str_match</code> <code>str_length</code> <code>str_wrap</code> from the <code>stringr</code> package (see <a href="R/read_secuTrial_raw.R">read_secuTrial_raw.R</a>):</p>
-<div class="sourceCode" id="cb52"><pre class="r">#' @importFrom stringr str_match str_length str_wrap</pre></div>
+<div class="sourceCode" id="cb52"><pre class="r"><span class="co">#' @importFrom stringr str_match str_length str_wrap</span></pre></div>
 </div>
 <div id="preparing-a-release-on-cran" class="section level3">
 <h3 class="hasAnchor">
