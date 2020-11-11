@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add factors to <code>secuTrialdata</code> objects — factorize • secuTrialR</title>
+<title>Add factors to secuTrialdata objects — factorize • secuTrialR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Add factors to <code>secuTrialdata</code> objects — factorize" />
+<meta property="og:title" content="Add factors to secuTrialdata objects — factorize" />
 <meta property="og:description" content="secuTrial can return a codebook of codes and labels for categorical variables, including lookup
              type variables, if this option is selected in the export tool ('reference values as separate table').
              This allows factors to be easily created. Factorize methods exist for secuTrialdata objects,
@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">secuTrialR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.7</span>
       </span>
     </div>
 
@@ -108,7 +108,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/SwissClinicalTrialOrganisation/secuTrialR/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -123,7 +128,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add factors to <code>secuTrialdata</code> objects</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/SwissClinicalTrialOrganisation/secuTrialR/blob/master/R/factorize.R'><code>R/factorize.R</code></a></small>
     <div class="hidden name"><code>factorize.Rd</code></div>
     </div>
 
@@ -135,10 +140,10 @@
              used by users. The other methods could be used with customized codebooks.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>factorize_secuTrial</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>factorize_secuTrial</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for secuTrialdata</span>
-<span class='fu'>factorize_secuTrial</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>factorize_secuTrial</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,11 +167,12 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># load secuTrial export with separate reference table</span>
-<span class='no'>sT_export</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='secuTrialdata.html'>read_secuTrial_raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"sT_exports"</span>, <span class='st'>"lnames"</span>,
+<span class='va'>sT_export</span> <span class='op'>&lt;-</span> <span class='fu'><a href='secuTrialdata.html'>read_secuTrial_raw</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"sT_exports"</span>, <span class='st'>"lnames"</span>,
                                             <span class='st'>"s_export_CSV-xls_CTU05_long_ref_miss_en_utf8.zip"</span>,
-                                            <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"secuTrialR"</span>))
+                                            package <span class='op'>=</span> <span class='st'>"secuTrialR"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># factorize the secuTrialdata object</span>
-<span class='no'>sT_export_factorized</span> <span class='kw'>&lt;-</span> <span class='fu'>factorize_secuTrial</span>(<span class='no'>sT_export</span>)</div></pre>
+<span class='va'>sT_export_factorized</span> <span class='op'>&lt;-</span> <span class='fu'>factorize_secuTrial</span><span class='op'>(</span><span class='va'>sT_export</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,7 +188,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
