@@ -150,7 +150,8 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ctu05_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_secuTrial.html">read_secuTrial</a></span><span class="op">(</span>data_dir <span class="op">=</span> <span class="va">ctu05_data_location</span><span class="op">)</span>
 <span class="co">#&gt; Read export successfully.</span>
-<span class="co">#&gt; Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span></code></pre></div>
+<span class="co">#&gt; The following export options deviate from the suggested specifications:</span>
+<span class="co">#&gt; Data from hidden fields is part of the export.</span></code></pre></div>
 <p>If the “Read export successfully.” message appears your data was correctly read. In this example you are also warned that hidden data fields are in the export which is a deviation from the suggested export option configuraion.</p>
 </div>
 <div class="section level2">
@@ -542,13 +543,16 @@
                                        <span class="st">"s_export_CSV-xls_CTU06_version1.zip"</span>,
                                        package <span class="op">=</span> <span class="st">"secuTrialR"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Read export successfully.</span>
-<span class="co">#&gt; Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
+<span class="co">#&gt; The following export options deviate from the suggested specifications:</span>
+<span class="co">#&gt; Data from hidden fields is part of the export.</span>
+<span class="co">#&gt; Short names was not selected.</span>
 
 <span class="va">ctu06_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_secuTrial.html">read_secuTrial</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sT_exports"</span>, <span class="st">"change_tracking"</span>,
                                        <span class="st">"s_export_CSV-xls_CTU06_version2.zip"</span>,
                                        package <span class="op">=</span> <span class="st">"secuTrialR"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Read export successfully.</span>
-<span class="co">#&gt; Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
+<span class="co">#&gt; The following export options deviate from the suggested specifications:</span>
+<span class="co">#&gt; Data from hidden fields is part of the export.</span>
 
 <span class="fu"><a href="../reference/diff_secuTrial.html">diff_secuTrial</a></span><span class="op">(</span><span class="va">ctu06_v1</span>, <span class="va">ctu06_v2</span><span class="op">)</span>
 <span class="co">#&gt; $new_forms</span>

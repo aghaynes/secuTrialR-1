@@ -105,14 +105,17 @@
 <span class="r-in">                                       <span class="st">"s_export_CSV-xls_CTU06_version1.zip"</span>,</span>
 <span class="r-in">                                       package <span class="op">=</span> <span class="st">"secuTrialR"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read export successfully.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following export options deviate from the suggested specifications:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Data from hidden fields is part of the export.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Short names was not selected.</span>
 <span class="r-in"><span class="co"># v2 contains 2 additional forms (mnpctu06anewform, mnpctu06anothernewform) and</span></span>
 <span class="r-in"><span class="co"># 2 additional variables (new_item_in_fu, new_item_in_new_form)</span></span>
 <span class="r-in"><span class="va">ctu06_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_secuTrial.html">read_secuTrial</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sT_exports"</span>, <span class="st">"change_tracking"</span>,</span>
 <span class="r-in">                                       <span class="st">"s_export_CSV-xls_CTU06_version2.zip"</span>,</span>
 <span class="r-in">                                       package <span class="op">=</span> <span class="st">"secuTrialR"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read export successfully.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following export options deviate from the suggested specifications:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Data from hidden fields is part of the export.</span>
 <span class="r-in"><span class="co"># return diff</span></span>
 <span class="r-in"><span class="fu">diff_secuTrial</span><span class="op">(</span><span class="va">ctu06_v1</span>, <span class="va">ctu06_v2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $new_forms</span>

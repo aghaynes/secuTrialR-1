@@ -109,7 +109,9 @@ This date is checked against mnpvisstartdate in the casenodes table.</p></dd>
 <span class="r-in"><span class="co"># read export</span></span>
 <span class="r-in"><span class="va">sT_export</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_secuTrial.html">read_secuTrial</a></span><span class="op">(</span><span class="va">expot_loc</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read export successfully.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following export options deviate from the suggested specifications:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Data from hidden fields is part of the export.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Short names was not selected.</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># return random participants</span></span>
 <span class="r-in"><span class="fu">return_random_participants</span><span class="op">(</span><span class="va">sT_export</span>, percent <span class="op">=</span> <span class="fl">0.25</span>, seed <span class="op">=</span> <span class="fl">1337</span>, date <span class="op">=</span> <span class="st">"2019-03-18"</span>,</span>
