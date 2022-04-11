@@ -94,8 +94,9 @@
 <div class="section level2">
 <h2 id="recommended-export-options">Recommended export options<a class="anchor" aria-label="anchor" href="#recommended-export-options"></a>
 </h2>
-<p>While the package strives to allow loading of as many types of secuTrial data exports as possible, there are certain export options which are less likely to cause issues. If possible it is suggested to export data which adheres to a suggested option set. Thus, we suggest to work with exports which: * are <strong>zipped</strong> * are <strong>English</strong> * have <strong>reference values</strong> stored <strong>in a separate table</strong> * contain <strong>Add-IDs</strong>, <strong>centre information</strong>, <strong>structure information</strong>, <strong>form status</strong>, <strong>project setup</strong> * do <strong>NOT</strong> have the <strong>meta data duplicated</strong> into all tables * are <strong>UTF-8</strong> encoded * are <strong>“CSV format”</strong> or <strong>“CSV format for MS Excel”</strong> * do <strong>NOT</strong> contain form <strong>data of hidden fields</strong></p>
+<p>While the package strives to allow loading of as many types of secuTrial data exports as possible, there are certain export options which are less likely to cause issues. If possible it is suggested to export data which adheres to a suggested option set. Thus, we suggest to work with exports which: - are <strong>zipped</strong> - are <strong>English</strong> - have <strong>reference values</strong> stored <strong>in a separate table</strong> - contain <strong>Add-IDs</strong>, <strong>centre information</strong>, <strong>structure information</strong>, <strong>form status</strong>, <strong>project setup</strong> - do <strong>NOT</strong> have the <strong>meta data duplicated</strong> into all tables - are <strong>UTF-8</strong> encoded - are <strong>“CSV format”</strong> or <strong>“CSV format for MS Excel”</strong> - do <strong>NOT</strong> contain form <strong>data of hidden fields</strong></p>
 <p>If you use <code><a href="reference/read_secuTrial.html">read_secuTrial()</a></code> to read your export then it will inform you regarding deviations.</p>
+<p>We also recommend using short names when exporting your data. Some users have reported issues importing data with long names, but the issues do not exist when using short names. That may (or may not) be related to upgarding SecuTrial.</p>
 </div>
 <div class="section level2">
 <h2 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
@@ -111,8 +112,7 @@
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">## Read export successfully.</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## The following export options deviate from the suggested specifications:</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">## Data from hidden fields is part of the export.</span></span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span></span></code></pre></div>
 <p>This will load all sheets from the export into an object of class <code>secuTrialdata</code>, which is basically a list. It will always contain <code>export_details</code> (which are parsed from the HTML ExportOptions file that secuTrial generates). By default, it will also contain all other files in the dataset. secuTrialR automatically strips file names of dates. The new file names can be seen via <code>ctu05$export_options$data_names</code>. The function also adds <a href="#variable-labels">labels to variables</a> and data.frames, converts <a href="#prepare-factors">categorical variables to <code>factor</code>s</a> and ensures that <a href="#prepare-dates">dates are <code>Date</code>s and date-times are <code>POSIXct</code></a>. <code>read_secuTrial</code> is a wrapper for the functions described below, so it is possible to achieve more flexibility by using the individual functions (if necessary). Individual tables can be extracted from the <code>ctu05</code> object via <code>tab &lt;- ctu05$tab</code>, where <code>tab</code> is the table of interest.</p>
 <details><p><summary>Wrapped functions</summary></p>
 <div class="section level4">
@@ -393,30 +393,51 @@
 <!-- PLOT METHOD DIRECTLY FOR secuTrialdata objects? -->
 </div>
 <div class="section level4">
+<h4 id="data-dictionary">Data dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h4>
+<p>It can be difficult to find the variable you’re looking for. secuTrialR provides the <code>dictionary_secuTrial</code> function to help:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">head</span>(<span class="kw">dictionary_secuTrial</span>(ctu05))</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">##        formtablename       formname      ffcolname               itemtype</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">## 1 emnpctu05surgeries      Surgeries  surgery_organ    Popup (Label Group)</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co">## 2 emnpctu05surgeries      Surgeries   surgery_type    Popup (Label Group)</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co">## 3         mnpctu05ae Adverse Events      ae_is_sae Horizontal Radiobutton</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co">## 4         mnpctu05ae Adverse Events    ae_end_time   Checked Time (hh:mm)</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="co">## 5         mnpctu05ae Adverse Events ae_description          Textarea 9,60</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="co">## 6         mnpctu05ae Adverse Events          notes          Textarea 9,60</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">##                        fflabel unit     formfamily</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co">## 1                        Organ &lt;NA&gt;       Subforms</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="co">## 2                         Type &lt;NA&gt;       Subforms</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">## 3                    Is an SAE &lt;NA&gt; Adverse Events</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">## 4                   Timepoints &lt;NA&gt; Adverse Events</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co">## 5 Description of Adverse Event &lt;NA&gt; Adverse Events</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">## 6                        Notes &lt;NA&gt; Adverse Events</span></span></code></pre></div>
+</div>
+<div class="section level4">
 <h4 id="linking-different-forms">Linking different forms<a class="anchor" aria-label="anchor" href="#linking-different-forms"></a>
 </h4>
 <p>Linkages amongst forms can be explored with the <code>links_secuTrial</code> function. This relies on the <code>igraph</code> package to create a network. It is possible to interact with the network, e.g. move nodes around in order to read the labels better. The device ID is returned to the console, but can be ignored. Forms are plotted in deep yellow, variables in light blue.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">links_secuTrial</span>(bmd_export)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">links_secuTrial</span>(bmd_export)</span></code></pre></div>
 <p><img src="inst/extdata/graphics/map.png"><!-- Figure has to be generated outside of the Rmd file - resize the window and select view/"fit to screen", export it to a PDF and then convert it to a PNG --></p>
 </div>
 <div class="section level4">
 <h4 id="sampling-random-participants">Sampling random participants<a class="anchor" aria-label="anchor" href="#sampling-random-participants"></a>
 </h4>
 <p>During study monitoring it is common practice to check random participants from a study database. These participants should be retrieved in a reproducible fashion. The below function allows this for a loaded secuTrial data export.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># retrieve at least 25 percent of participants recorded after March 18th 2019 </span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="co"># from the centres "Inselspital Bern" and "Charité Berlin"</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">return_random_participants</span>(ctu05, <span class="dt">percent =</span> <span class="fl">0.25</span>, <span class="dt">seed =</span> <span class="dv">1337</span>, <span class="dt">date =</span> <span class="st">"2019-03-18"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4"></a>                           <span class="dt">centres =</span> <span class="kw">c</span>(<span class="st">"Inselspital Bern (RPACK)"</span>, <span class="st">"Charité Berlin (RPACK)"</span>))</span>
-<span id="cb23-5"><a href="#cb23-5"></a></span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="co">## $participants</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="co">##          mnpaid                   centre mnpvisstartdate</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="co">## 2 RPACK-INS-012 Inselspital Bern (RPACK)      2019-04-12</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="co">## 4 RPACK-INS-014 Inselspital Bern (RPACK)      2019-04-14</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a><span class="co">## 5 RPACK-CBE-005   Charité Berlin (RPACK)      2019-04-05</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a><span class="co">## 3 RPACK-CBE-003   Charité Berlin (RPACK)      2019-04-03</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a><span class="co">## </span></span>
-<span id="cb23-13"><a href="#cb23-13"></a><span class="co">## $rng_config</span></span>
-<span id="cb23-14"><a href="#cb23-14"></a><span class="co">## [1] "Mersenne-Twister" "Inversion"        "Rejection"</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># retrieve at least 25 percent of participants recorded after March 18th 2019 </span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># from the centres "Inselspital Bern" and "Charité Berlin"</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="kw">return_random_participants</span>(ctu05, <span class="dt">percent =</span> <span class="fl">0.25</span>, <span class="dt">seed =</span> <span class="dv">1337</span>, <span class="dt">date =</span> <span class="st">"2019-03-18"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4"></a>                           <span class="dt">centres =</span> <span class="kw">c</span>(<span class="st">"Inselspital Bern (RPACK)"</span>, <span class="st">"Charité Berlin (RPACK)"</span>))</span>
+<span id="cb24-5"><a href="#cb24-5"></a></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co">## $participants</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co">##          mnpaid                   centre mnpvisstartdate</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co">## 2 RPACK-INS-012 Inselspital Bern (RPACK)      2019-04-12</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="co">## 4 RPACK-INS-014 Inselspital Bern (RPACK)      2019-04-14</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co">## 5 RPACK-CBE-005   Charité Berlin (RPACK)      2019-04-05</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co">## 3 RPACK-CBE-003   Charité Berlin (RPACK)      2019-04-03</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="co">## </span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co">## $rng_config</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="co">## [1] "Mersenne-Twister" "Inversion"        "Rejection"</span></span></code></pre></div>
 </div>
 </div>
 </details>
@@ -427,30 +448,30 @@
 <div class="section level3">
 <h3 id="testing-with-devtools">Testing with devtools<a class="anchor" aria-label="anchor" href="#testing-with-devtools"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># run tests</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="st">"secuTrialR"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="co"># spell check -&gt; will contain some technical terms beyond the below list which is fine</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>ignore_words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"AdminTool"</span>, <span class="st">"allforms"</span>, <span class="st">"casenodes"</span>, <span class="st">"CDMS"</span>, <span class="st">"codebook"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5"></a>                  <span class="st">"codebooks"</span>, <span class="st">"datetime"</span> ,<span class="st">"dir"</span> ,<span class="st">"Hmisc"</span> ,<span class="st">"igraph"</span>,</span>
-<span id="cb24-6"><a href="#cb24-6"></a>                  <span class="st">"labelled"</span>, <span class="st">"mnp"</span>, <span class="st">"savedforms"</span>, <span class="st">"secutrial"</span>, <span class="st">"secuTrial"</span>, </span>
-<span id="cb24-7"><a href="#cb24-7"></a>                  <span class="st">"secuTrialdata"</span>, <span class="st">"tcltk"</span>, <span class="st">"tibble"</span>)</span>
-<span id="cb24-8"><a href="#cb24-8"></a>devtools<span class="op">::</span><span class="kw">spell_check</span>(<span class="st">"secuTrialR"</span>, <span class="dt">ignore =</span> ignore_words)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># run tests</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>devtools<span class="op">::</span><span class="kw">test</span>(<span class="st">"secuTrialR"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="co"># spell check -&gt; will contain some technical terms beyond the below list which is fine</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>ignore_words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"AdminTool"</span>, <span class="st">"allforms"</span>, <span class="st">"casenodes"</span>, <span class="st">"CDMS"</span>, <span class="st">"codebook"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5"></a>                  <span class="st">"codebooks"</span>, <span class="st">"datetime"</span> ,<span class="st">"dir"</span> ,<span class="st">"Hmisc"</span> ,<span class="st">"igraph"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6"></a>                  <span class="st">"labelled"</span>, <span class="st">"mnp"</span>, <span class="st">"savedforms"</span>, <span class="st">"secutrial"</span>, <span class="st">"secuTrial"</span>, </span>
+<span id="cb25-7"><a href="#cb25-7"></a>                  <span class="st">"secuTrialdata"</span>, <span class="st">"tcltk"</span>, <span class="st">"tibble"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8"></a>devtools<span class="op">::</span><span class="kw">spell_check</span>(<span class="st">"secuTrialR"</span>, <span class="dt">ignore =</span> ignore_words)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="linting-with-lintr">Linting with lintr<a class="anchor" aria-label="anchor" href="#linting-with-lintr"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># lint the package -&gt; should be clean</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">library</span>(lintr)</span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">lint_package</span>(<span class="st">"secuTrialR"</span>, <span class="dt">linters =</span> <span class="kw">with_defaults</span>(<span class="dt">camel_case_linter =</span> <span class="ot">NULL</span>,</span>
-<span id="cb25-4"><a href="#cb25-4"></a>                                                   <span class="dt">object_usage_linter =</span> <span class="ot">NULL</span>,</span>
-<span id="cb25-5"><a href="#cb25-5"></a>                                                   <span class="kw">line_length_linter</span>(<span class="dv">125</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># lint the package -&gt; should be clean</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">library</span>(lintr)</span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="kw">lint_package</span>(<span class="st">"secuTrialR"</span>, <span class="dt">linters =</span> <span class="kw">with_defaults</span>(<span class="dt">camel_case_linter =</span> <span class="ot">NULL</span>,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>                                                   <span class="dt">object_usage_linter =</span> <span class="ot">NULL</span>,</span>
+<span id="cb26-5"><a href="#cb26-5"></a>                                                   <span class="kw">line_length_linter</span>(<span class="dv">125</span>)))</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="building-the-vignette">Building the vignette<a class="anchor" aria-label="anchor" href="#building-the-vignette"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">library</span>(rmarkdown)</span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">render</span>(<span class="st">"vignettes/secuTrialR-package-vignette.Rmd"</span>,</span>
-<span id="cb26-3"><a href="#cb26-3"></a>       <span class="dt">output_format=</span><span class="kw">c</span>(<span class="st">"pdf_document"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">library</span>(rmarkdown)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">render</span>(<span class="st">"vignettes/secuTrialR-package-vignette.Rmd"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>       <span class="dt">output_format=</span><span class="kw">c</span>(<span class="st">"pdf_document"</span>))</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generating-the-readme-file">Generating the README file<a class="anchor" aria-label="anchor" href="#generating-the-readme-file"></a>
@@ -462,16 +483,16 @@
 </h3>
 <p>Dependencies to other R packages are to be declared in the <code>DESCRIPTION</code> file under <code>Imports:</code> and in the specific <code>roxygen2</code> documentation of the functions relying on the dependency. It is suggested to be as explicit as possible. i.e. Just import functions that are needed and not entire packages.</p>
 <p>Example to import <code>str_match</code> <code>str_length</code> <code>str_wrap</code> from the <code>stringr</code> package (see <a href="R/read_secuTrial_raw.R">read_secuTrial_raw.R</a>):</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">#' @importFrom stringr str_match str_length str_wrap</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">#' @importFrom stringr str_match str_length str_wrap</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="preparing-a-release-on-cran">Preparing a release on CRAN<a class="anchor" aria-label="anchor" href="#preparing-a-release-on-cran"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># build the package archive</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>R CMD build secuTrialR</span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="co"># in this example for version 0.9.0</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>R CMD check secuTrialR_<span class="dv">0</span>.<span class="dv">9</span>.<span class="fl">0.</span>tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># build the package archive</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>R CMD build secuTrialR</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="co"># check the archive (should return "Status: OK", no WARNINGs, no NOTEs)</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># in this example for version 0.9.0</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>R CMD check secuTrialR_<span class="dv">0</span>.<span class="dv">9</span>.<span class="fl">0.</span>tar.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="versioning-and-releases">Versioning and releases<a class="anchor" aria-label="anchor" href="#versioning-and-releases"></a>

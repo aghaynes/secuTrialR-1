@@ -65,7 +65,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_secuTrial</span><span class="op">(</span><span class="va">data_dir</span>, labels <span class="op">=</span> <span class="cn">TRUE</span>, factor <span class="op">=</span> <span class="cn">TRUE</span>, dates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_secuTrial</span><span class="op">(</span><span class="va">data_dir</span>, labels <span class="op">=</span> <span class="cn">TRUE</span>, factor <span class="op">=</span> <span class="cn">TRUE</span>, dates <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,6 +79,8 @@
 (ignored when reference values are not in a separate table)</p></dd>
 <dt>dates</dt>
 <dd><p>logical - convert date variables</p></dd>
+<dt>...</dt>
+<dd><p>options passed to <code>read_secuTrial_raw</code>. Can be used for passing options to read.table</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -94,8 +96,7 @@
 <span class="r-in"><span class="co"># read all export data</span></span>
 <span class="r-in"><span class="va">sT_export</span> <span class="op">&lt;-</span> <span class="fu">read_secuTrial</span><span class="op">(</span>data_dir <span class="op">=</span> <span class="va">export_location</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read export successfully.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following export options deviate from the suggested specifications:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Data from hidden fields is part of the export.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Input to read_secuTrial() appears to be incompatible. It should be in CSV format and not be rectangular.</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
