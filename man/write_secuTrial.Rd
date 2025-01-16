@@ -13,7 +13,7 @@ write_secuTrial(object, ...)
 \method{write_secuTrial}{data.frame}(object, filename, path = "", format = "dta", ...)
 }
 \arguments{
-\item{object}{a data.frame}
+\item{object}{\code{secuTrialdata} object}
 
 \item{...}{further parameters}
 
